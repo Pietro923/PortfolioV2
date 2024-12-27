@@ -4,85 +4,104 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 const projects = [
   {
-    title: "Proyecto 1",
-    description: "Una descripción detallada del proyecto 1, explicando sus características principales y el impacto que tiene.",
+    title: "Aplicación Web RRHH - Pueble SA",
+    description: "Desarrollada para Pueble SA, esta aplicación web optimiza la gestión de recursos humanos dentro de la empresa. Proporciona herramientas para administrar empleados, roles, y permisos, además de facilitar el seguimiento de actividades laborales y la generación de reportes personalizados. Diseñada con un enfoque en la eficiencia y usabilidad, esta plataforma contribuye significativamente a mejorar la organización interna y la productividad de Pueble SA.",
     image: "/api/placeholder/600/400",
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
-    githubLink: "https://github.com/usuario/proyecto1",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
+    githubLink: "https://github.com/Pietro923/recursos-humanos-app",
     liveLink: "https://proyecto1.com"
   },
   {
-    title: "Proyecto 2",
-    description: "Una descripción detallada del proyecto 2, mostrando sus funcionalidades únicas y los problemas que resuelve.",
+    title: "Sistema de Gestión - Alenort",
+    description: "Un sistema integral diseñado para Alenort - Distribuidora Avícola, que optimiza la gestión de roles administrativos como Encargado de Logística, Administrador General y Vendedor. La plataforma permite administrar inventarios diarios, gestionar clientes y rutas, y mantener un control detallado de ventas y repartos. Con funcionalidades como login/registro seguro, un Sidebar consistente y una tabla interactiva de productos, esta solución facilita la operación diaria y mejora la eficiencia administrativa.",
     image: "/api/placeholder/600/400",
-    technologies: ["Next.js", "Node.js", "MongoDB"],
-    githubLink: "https://github.com/usuario/proyecto2",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
+    githubLink: "https://github.com/Pietro923/Punto-de-venta-Alenort",
     liveLink: "https://proyecto2.com"
+  },  
+  {
+    title: "Portfolio Versión Nº 1 - Pietro Bonacossa",
+    description: "Este es mi primer Portfolio realizado en Astro, utilizando Tailwind. Lo subí como plantilla disponible en Astro para que cualquier programador pueda crear su propio Portfolio realizando pequeños cambios para su personalización. Plantilla disponible en <a href='https://astro.build/themes/details/portfolio-apto-para-todo-pblico-portfolio-suitable-for-all-audiences/' target='_blank' class='text-blue-600''>Astro</a>.",
+    image: "/api/placeholder/600/400",
+    technologies: ["Astro", "Tailwind CSS", "Netlify"],
+    githubLink: "https://github.com/Pietro923/portfolio-Pietro",
+    liveLink: "https://portfolio-pietro.netlify.app/"
   },
   {
-    title: "Proyecto 3",
-    description: "Una descripción detallada del proyecto 3, destacando sus características técnicas y el valor que aporta.",
+    title: "Wordle by P",
+    description: "Con el objetivo de practicar typescript y la programacion web cree un Wordle o Adivina la Palabra ya que me gusta mucho jugar ese juego.",
     image: "/api/placeholder/600/400",
-    technologies: ["Vue.js", "Express", "PostgreSQL"],
-    githubLink: "https://github.com/usuario/proyecto3",
-    liveLink: "https://proyecto3.com"
+    technologies: ["Next.js", "Tailwind CSS","TypeScript", "Vercel",],
+    githubLink: "https://github.com/Pietro923/wordle-by-P",
+    liveLink: ""
   }
 ];
 
 const Projects = () => {
   return (
-    <section id="projects" className="min-h-screen flex items-center justify-center py-20">
-       <div className="max-w-6xl mx-auto px-4 w-full">
-       <div className="flex items-center gap-4 mb-16">
+    <section id="projects" className="min-h-screen py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex items-center gap-4 mb-16">
           <Code className="w-8 h-8" />
           <h2 className="text-4xl font-bold">Proyectos</h2>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className="w-full h-48 object-cover"
-              />
+            <Card key={index} className="flex flex-col lg:flex-row overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="lg:w-2/5">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               
-              <CardHeader>
-                <CardTitle>{project.title}</CardTitle>
-                <CardDescription>{project.description}</CardDescription>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex}
-                      className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-              
-              <CardFooter className="flex justify-end gap-4">
-                <a 
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
-                <a 
-                  href={project.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                </a>
-              </CardFooter>
+              <div className="lg:w-3/5 flex flex-col">
+                <CardHeader>
+                  <CardTitle className="text-2xl">{project.title}</CardTitle>
+                  <CardDescription className="text-base">{project.title.includes("Portfolio") ? (
+                      <div dangerouslySetInnerHTML={{ __html: project.description }} />
+                    ) : (
+                      project.description
+                    )}
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="flex-grow">
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span 
+                        key={techIndex}
+                        className="px-4 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+                
+                <CardFooter className="flex justify-end gap-6 pt-4">
+                  <a 
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                  >
+                    <Github className="w-5 h-5" />
+                    <span className="text-sm">Código</span>
+                  </a>
+                  <a 
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    <span className="text-sm">Demo</span>
+                  </a>
+                </CardFooter>
+              </div>
             </Card>
           ))}
         </div>

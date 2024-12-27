@@ -15,26 +15,39 @@ type Certificate = {
 const certificates: Certificate[] = [
   {
     id: 1,
-    title: "Certificado JavaScript",
-    image: "/certificates/cert1.jpg", // Ajusta las rutas según tu estructura
-    link: "https://platform.org/certificate/1",
-    issuer: "Platform Name"
+    title: "GitHub",
+    image: "/certs/certificate-github.jpg", 
+    link: "https://cursos.desafiolatam.com/certificates/2bzutwrvbv",
+    issuer: "Desafio Latam"
   },
   {
     id: 2,
-    title: "Certificado React",
-    image: "/certificates/cert2.jpg",
-    link: "https://platform.org/certificate/2",
-    issuer: "Platform Name"
+    title: "Introducción a la Programación Web",
+    image: "/certs/certificate-prog-web.jpg",
+    link: "https://cursos.desafiolatam.com/certificates/sz61enwcrg",
+    issuer: "Desafio Latam"
   },
   {
     id: 3,
-    title: "Certificado Node.js",
-    image: "/certificates/cert3.jpg",
-    link: "https://platform.org/certificate/3",
-    issuer: "Platform Name"
+    title: "SQL Interactivo",
+    image: "/certs/certificate-sql.jpg",
+    link: "https://www.tutorialesinteractivos.com/certificados/a5b3f840-934b-46cf-b210-e00d8b3b875e",
+    issuer: "Desafio Latam"
   },
-  // Añade más certificados según necesites
+  {
+    id: 4,
+    title: "CiberSegurity",
+    image: "/certs/cert_cibersegurity.png",
+    link: "https://www.credly.com/badges/41aafd94-7623-4b21-b94e-c5436b50cfae/public_url",
+    issuer: "Cisco Networking Academy"
+  },
+  {
+    id: 5,
+    title: "English For It",
+    image: "/certs/cert_english.png",
+    link: "https://www.credly.com/badges/964b77c8-142b-467b-87a5-0eed7084f6cd/public_url",
+    issuer: "Cisco Networking Academy"
+  },
 ];
 
 const Certs = () => {
@@ -75,7 +88,7 @@ return (
 
         <Dialog open={!!selectedCert} onOpenChange={() => setSelectedCert(null)}>
         {selectedCert && (
-            <DialogContent className="max-w-4xl">
+            <DialogContent className="max-w-4xl h-[90vh] overflow-y-auto">
             <DialogHeader>
                 <DialogTitle className="flex items-center justify-between">
                 <span>{selectedCert.title}</span>
@@ -101,7 +114,7 @@ return (
                 <img
                 src={selectedCert.image}
                 alt={selectedCert.title}
-                className="w-full h-auto rounded-lg"
+                className="w-full h-[60vh] object-contain rounded-lg"
                 />
                 <div className="mt-4 text-center">
                 <p className="text-sm text-gray-600 dark:text-gray-400">

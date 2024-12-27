@@ -44,7 +44,7 @@ const About = () => {
         <div className="relative group">
           <div className="aspect-square rounded-2xl overflow-hidden">
             <img
-              src="/api/placeholder/400/400"
+              src="/me.jpeg"
               alt="Juan Pietro Bonacossa"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />

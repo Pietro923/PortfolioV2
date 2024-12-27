@@ -32,50 +32,59 @@ const Tech = () => {
       { name: 'Postman', icon: '/icons/postman.svg' },
       { name: 'Vercel', icon: '/icons/vercel.svg' },
       { name: 'Notion', icon: '/icons/notion.svg' },
+      { name: 'Netlify', icon: '/icons/netlify.svg' },
       { name: 'Trello', icon: '/icons/trello.svg' },
     ],
   }
 
+  const getCategoryTitle = (category: string) => {
+    const titles: { [key: string]: string } = {
+      languages: 'Lenguajes',
+      databases: 'Bases de Datos',
+      frameworks: 'Frameworks y Librerías',
+      tools: 'Herramientas',
+    };
+  
+    return titles[category] || 'Categoría desconocida';
+  };
+
   return (
     <section id="tech" className="min-h-screen py-20 bg-neutral-50 dark:bg-neutral-950">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="flex items-center gap-3 mb-16">
-          <Grid2X2 className="w-6 h-6 text-neutral-800 dark:text-neutral-200" />
-          <h2 className="text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex items-center gap-4 mb-16">
+          <Grid2X2 className="w-8 h-8 text-neutral-800 dark:text-neutral-200" />
+          <h2 className="text-4xl font-light tracking-tight text-neutral-800 dark:text-neutral-200">
             Tecnologías
           </h2>
         </div>
 
-        <div className="space-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           {Object.entries(technologies).map(([category, techs]) => (
             <div key={category} className="space-y-6">
-              <h3 className="text-lg font-medium text-neutral-600 dark:text-neutral-400">
-                {category === 'languages' && 'Lenguajes'}
-                {category === 'databases' && 'Bases de Datos'}
-                {category === 'frameworks' && 'Frameworks y Librerías'}
-                {category === 'tools' && 'Herramientas'}
+              <h3 className="text-xl font-medium text-neutral-600 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-800 pb-2">
+                {getCategoryTitle(category)}
               </h3>
               
-              <div className="relative">
-                <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide">
-                  {techs.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="flex-none group"
-                    >
-                      <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-white dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {techs.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="group hover:scale-105 transition-all duration-200"
+                  >
+                    <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-white dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200 shadow-sm hover:shadow-md">
+                      <div className="w-12 h-12 flex items-center justify-center">
                         <img
                           src={tech.icon}
                           alt={tech.name}
-                          className="w-6 h-6 transition-transform duration-200 group-hover:scale-110"
+                          className="w-8 h-8 transition-transform duration-200 group-hover:scale-110"
                         />
-                        <span className="text-sm whitespace-nowrap text-neutral-600 dark:text-neutral-400">
-                          {tech.name}
-                        </span>
                       </div>
+                      <span className="text-sm font-medium text-center text-neutral-600 dark:text-neutral-400">
+                        {tech.name}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}

@@ -132,23 +132,24 @@ const Contact = () => {
 
             {/* Mapa o imagen decorativa */}
             <Card className="border-none shadow-lg overflow-hidden">
-  <CardContent className="p-0">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.7725037034853!2d-65.22755378547264!3d-26.80828509487683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225d1f9a6b16f9%3A0xe31c6dd8c20ff091!2sSan%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n%2C%20Argentina!5e0!3m2!1ses-419!2s!4v1700000000000!5m2!1ses-419!2s"
-      width="100%"
-      height="192"
-      style={{ border: 0 }}
-      allowFullScreen
-      loading="lazy"
-    ></iframe>
-  </CardContent>
-</Card>
+            <CardContent className="p-0">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.7725037034853!2d-65.22755378547264!3d-26.80828509487683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225d1f9a6b16f9%3A0xe31c6dd8c20ff091!2sSan%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n%2C%20Argentina!5e0!3m2!1ses-419!2s!4v1700000000000!5m2!1ses-419!2s"
+                width="100%"
+                height="192"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+              ></iframe>
+            </CardContent>
+            </Card>
           </div>
 
           {/* Formulario */}
           <Card className="border-none shadow-lg">
             <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
+              <p className="text-xl font-semibold text-gray-800 text-center">Contacto</p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Input

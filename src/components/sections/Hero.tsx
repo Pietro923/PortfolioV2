@@ -15,7 +15,7 @@ const socialLinks = [
 ];
 
 return (
-    <section id="home" className="min-h-screen relative flex items-center justify-center bg-neutral-50 dark:bg-neutral-950 overflow-hidden">
+    <section id="home" className="min-h-screen relative flex items-center justify-center dark:bg-neutral-950 overflow-hidden">
       {/* Decorative elements */}
     <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-blue-100/20 to-transparent dark:from-blue-950/20 rounded-full blur-3xl" />
@@ -37,13 +37,12 @@ return (
                 transition={{ delay: 0.2, duration: 0.8 }}
                 className="space-y-4"
             >
-                <div className="inline-block mb-2">
-                <Badge 
-                    variant="secondary" 
-                    className="text-sm font-medium px-4 py-1 bg-neutral-100 dark:bg-neutral-800"
-                >
-                    Programador Full-Stack
-                </Badge>
+                <div className="flex flex-col items-center gap-2 mb-2">
+                    <Badge 
+                        className="text-sm font-medium px-4 py-1 bg-emerald-100 text-emerald-700 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                        <span className="mr-1.5 h-2 w-2 rounded-full bg-emerald-500 inline-block"></span>
+                        Open to Work
+                    </Badge>
                 </div>
                 
                 <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -65,7 +64,6 @@ return (
                 Mi objetivo es participar en proyectos innovadores que amplíen mis 
                 conocimientos y permitan aportar soluciones creativas y efectivas.
             </motion.p>
-
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -98,18 +96,20 @@ return (
                         />
                     </a>
                     </Button>
+                    
                 </motion.div>
                 ))}
-        </motion.div>
+            </motion.div>
+
             <Button
                 asChild
                 size="lg"
                 variant="outline"
                 className="gap-2 border-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                >
+            >
                 <a href="/Juan Pietro Bonacossa CV.pdf" target="_blank" rel="noopener noreferrer">
-                <Download className="w-4 h-4" />
-                Descargar CV
+                    <Download className="w-4 h-4" />
+                    Descargar CV
                 </a>
             </Button>
             </div>

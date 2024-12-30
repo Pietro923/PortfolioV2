@@ -33,7 +33,7 @@ const projects = [
     image: "/api/placeholder/600/400",
     technologies: ["Next.js", "Tailwind CSS","TypeScript", "Vercel",],
     githubLink: "https://github.com/Pietro923/wordle-by-P",
-    liveLink: ""
+    liveLink: "https://wordle-by-p.vercel.app/"
   }
 ];
 

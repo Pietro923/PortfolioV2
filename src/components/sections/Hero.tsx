@@ -1,18 +1,34 @@
 "use client"
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Download } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 const Hero = () => {
+const { theme, resolvedTheme } = useTheme();
+const [mounted, setMounted] = useState(false);
+
+// Esperar a que el componente se monte
+useEffect(() => {
+    setMounted(true);
+  }, []);
+
 const socialLinks = [
     { name: 'LinkedIn', icon: '/icons/linkedin.svg', url: 'https://www.linkedin.com/in/pietrobonacossa/' },
-    { name: 'Github', icon: '/icons/github.svg', url: 'https://github.com/Pietro923' },
+    { name: 'Github', icon: '/icons/github.svg', darkIcon: "/icons/githubdark.svg", url: 'https://github.com/Pietro923' },
     { name: 'Gmail', icon: '/icons/gmail.svg', url: 'mailto:jpbonacossa@gmail.com' },
     { name: 'Discord', icon: '/icons/discord.svg', url: 'https://discord.com/users/222491467275436033' },
 ];
+
+// Determinar el ícono a mostrar solo después del montaje
+const getIconSrc = (link: { name: string; icon: string; url: string; darkIcon?: undefined; } | { name: string; icon: string; darkIcon: string; url: string; }) => {
+    if (!mounted) return link.icon; // Usar el ícono predeterminado durante SSR
+    const currentTheme = theme === 'system' ? resolvedTheme : theme;
+    return link.darkIcon && currentTheme === 'dark' ? link.darkIcon : link.icon;
+  };
 
 return (
     <section id="home" className="min-h-screen relative flex items-center justify-center dark:bg-neutral-950 overflow-hidden">
@@ -38,11 +54,11 @@ return (
                 className="space-y-4"
             >
                 <div className="flex flex-col items-center gap-2 mb-2">
-                    <Badge 
-                        className="text-sm font-medium px-4 py-1 bg-emerald-100 text-emerald-700 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
-                        <span className="mr-1.5 h-2 w-2 rounded-full bg-emerald-500 inline-block"></span>
-                        Open to Work
-                    </Badge>
+                <Badge 
+                    className="text-sm font-medium px-4 py-1 bg-emerald-100 text-emerald-700 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                    <span className="mr-1.5 h-2 w-2 rounded-full bg-emerald-500 inline-block"></span>
+                    Open to Work
+                </Badge>
                 </div>
                 
                 <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
@@ -71,12 +87,12 @@ return (
                 className="flex justify-center gap-6"
             >
                 {socialLinks.map((link, index) => (
-                <motion.div
+            <motion.div
                     key={link.name}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
-                >
+            >
                     <Button
                     variant="ghost"
                     size="icon"
@@ -90,13 +106,12 @@ return (
                         title={link.name}
                     >
                         <img
-                        src={link.icon}
-                        alt={link.name}
-                        className="w-5 h-5"
+                          src={getIconSrc(link)}
+                          alt={link.name}
+                          className="w-5 h-5"
                         />
                     </a>
                     </Button>
-                    
                 </motion.div>
                 ))}
             </motion.div>
@@ -107,9 +122,9 @@ return (
                 variant="outline"
                 className="gap-2 border-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
             >
-                <a href="/Juan Pietro Bonacossa CV.pdf" target="_blank" rel="noopener noreferrer">
-                    <Download className="w-4 h-4" />
-                    Descargar CV
+                <a href="Pietro/Juan Pietro Bonacossa CV.pdf" target="_blank" rel="noopener noreferrer">
+                <Download className="w-4 h-4" />
+                Descargar CV
                 </a>
             </Button>
             </div>

@@ -19,7 +19,7 @@ const ThemeLanguageControls = () => {
   }
 
   return (
-    <div className="fixed top-4 right-4 flex items-center gap-2">
+    <div className="fixed top-4 right-4 flex items-center gap-2 z-50">
       <Button
         variant="ghost"
         size="icon"

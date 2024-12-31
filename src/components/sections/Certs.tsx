@@ -88,7 +88,7 @@ return (
 
         <Dialog open={!!selectedCert} onOpenChange={() => setSelectedCert(null)}>
         {selectedCert && (
-            <DialogContent className="max-w-4xl h-[90vh] overflow-y-auto">
+            <DialogContent className="max-w-4xl h-[90vh] overflow-y-auto dark:bg-neutral-900">
             <DialogHeader>
                 <DialogTitle className="flex items-center justify-between">
                 <span>{selectedCert.title}</span>

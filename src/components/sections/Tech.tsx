@@ -10,6 +10,7 @@ const Tech = () => {
       { name: 'TypeScript', icon: '/icons/typescript.svg' },
       { name: 'PHP', icon: '/icons/php.svg' },
       { name: 'C#', icon: '/icons/csharp.svg' },
+      { name: 'Rust', icon: '/icons/Rust_light.svg' },
     ],
     databases: [
       { name: 'MongoDB', icon: '/icons/mongodb.svg' },
@@ -24,6 +25,7 @@ const Tech = () => {
       { name: 'React', icon: '/icons/react.svg' },
       { name: 'Next.js', icon: '/icons/nextjs.svg' },
       { name: 'Tailwind', icon: '/icons/tailwind.svg' },
+      { name: 'Tauri', icon: '/icons/tauri.svg' },
     ],
     tools: [
       { name: 'Figma', icon: '/icons/figma.svg' },

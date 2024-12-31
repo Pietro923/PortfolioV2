@@ -42,7 +42,7 @@ const About = () => {
         <div className="relative group">
           <div className="aspect-square rounded-2xl overflow-hidden">
             <img
-              src="/me.jpeg"
+              src="Pietro/me.jpeg"
               alt="Juan Pietro Bonacossa"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />

@@ -149,7 +149,7 @@ const Contact = () => {
           <Card className="border-none shadow-lg">
             <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
-              <p className="text-xl font-semibold text-gray-800 text-center">Contacto</p>
+              <p className="text-xl font-semibold text-gray-800 text-center dark:text-white">Contacto</p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Input

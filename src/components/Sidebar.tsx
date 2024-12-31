@@ -1,10 +1,17 @@
-'use client'
-
-import React, { useState } from 'react'
+"use client"
+import React, { useState, useEffect } from 'react'
 import { Home, User, FileText, Book, Server, Mail } from 'lucide-react'
+import { useTheme } from 'next-themes'
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('home')
+  const [mounted, setMounted] = useState(false)
+  const { theme, resolvedTheme } = useTheme()
+
+  // Esperar a que el componente se monte para evitar errores de hidratación
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
@@ -23,34 +30,68 @@ const Sidebar = () => {
     { name: 'Contacto', icon: Mail, id: 'contact' }
   ]
 
+  // Determinar el tema actual de manera segura
+  const currentTheme = theme === 'system' ? resolvedTheme : theme
+  const isDark = currentTheme === 'dark'
+
+  // No renderizar nada hasta que el componente esté montado
+  if (!mounted) {
+    return null
+  }
+
   return (
-    <aside className="fixed left-0 top-0 h-screen w-20 bg-white/90 backdrop-blur-md border-r shadow-lg flex flex-col items-center py-8 z-50">
+    <aside
+      className={`
+        fixed left-0 top-0 h-screen w-20 
+        border-r shadow-lg flex flex-col items-center py-8 z-50
+        transition-colors duration-300
+        ${isDark ? 'bg-neutral-900/95 text-neutral-200 border-neutral-700' : 'bg-white/95 text-gray-800 border-gray-200'}
+        backdrop-blur-sm
+      `}
+    >
       <div className="flex flex-col items-center gap-8 w-full">
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => scrollToSection(item.id)}
-            className={`
-              relative w-full px-3 py-4 flex flex-col items-center justify-center gap-2
-              transition-all duration-300 ease-in-out
-              hover:bg-blue-50 group
-              ${activeSection === item.id 
-                ? 'text-blue-600 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:h-12 after:w-1 after:bg-blue-600 after:rounded-l-md' 
-                : 'text-gray-500 hover:text-blue-600'
-              }
-            `}
-          >
-            <item.icon className={`
-              w-6 h-6 transition-transform duration-300
-              group-hover:scale-110
-              ${activeSection === item.id ? 'scale-110' : ''}
-            `} />
-            
-            <span className="text-xs font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 absolute left-24 bg-gray-800 text-white px-3 py-2 rounded-md whitespace-nowrap shadow-lg before:absolute before:left-[-0.5rem] before:top-1/2 before:-translate-y-1/2 before:border-[6px] before:border-transparent before:border-r-gray-800">
-              {item.name}
-            </span>
-          </button>
-        ))}
+        {navItems.map((item) => {
+          const isActive = activeSection === item.id
+          const activeColor = isDark ? 'text-blue-400' : 'text-blue-600'
+          const inactiveColor = isDark ? 'text-neutral-400 hover:text-blue-400' : 'text-gray-500 hover:text-blue-600'
+
+          return (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className={`
+                relative w-full px-3 py-4 flex flex-col items-center justify-center gap-2
+                transition-all duration-300 ease-in-out group
+                ${isActive 
+                  ? `${activeColor} after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 
+                     after:h-12 after:w-1 after:rounded-l-md after:bg-current` 
+                  : inactiveColor}
+              `}
+            >
+              <item.icon 
+                className={`
+                  w-6 h-6 transition-transform duration-300 
+                  group-hover:scale-110 
+                  ${isActive ? 'scale-110' : ''}
+                `} 
+              />
+              <span 
+                className={`
+                  text-xs font-medium opacity-0 group-hover:opacity-100 
+                  transition-all duration-300 absolute left-24 
+                  px-3 py-2 rounded-md whitespace-nowrap shadow-lg
+                  before:absolute before:left-[-0.5rem] before:top-1/2 
+                  before:-translate-y-1/2 before:border-[6px] before:border-transparent
+                  ${isDark 
+                    ? 'bg-neutral-800 text-neutral-200 before:border-r-neutral-800'
+                    : 'bg-gray-800 text-white before:border-r-gray-800'}
+                `}
+              >
+                {item.name}
+              </span>
+            </button>
+          )
+        })}
       </div>
     </aside>
   )

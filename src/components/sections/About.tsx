@@ -1,8 +1,6 @@
 import React from 'react';
-import { User, Download, Code, Globe, Rocket, Book } from 'lucide-react';
+import { User, Code, Globe, Rocket, Book } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 const About = () => {
   const features = [

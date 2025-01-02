@@ -14,18 +14,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.className}  dark:bg-neutral-950`}>
+      <body className={`${inter.className} dark:bg-neutral-950`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Sidebar />
-          <ThemeLanguageControls />
-          <main className="ml-20 min-h-screen">
-            {children}
-          </main>
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <div className="flex-1">
+              <ThemeLanguageControls />
+              <main className="md:ml-20 px-4 md:px-8 pt-16 md:pt-0 min-h-screen">
+                {children}
+              </main>
+            </div>
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>

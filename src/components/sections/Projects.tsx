@@ -166,16 +166,26 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
 const projects = [
   {
     title: "Aplicación Web RRHH - Pueble SA",
-    description: "Desarrollada para Pueble SA, esta aplicación web optimiza la gestión de recursos humanos dentro de la empresa. Proporciona herramientas para administrar empleados, roles, y permisos, además de facilitar el seguimiento de actividades laborales y la generación de reportes personalizados.",
+    description: "Desarrollada para Pueble SA, con el objetivo de optimizar la gestión de recursos humanos dentro de la empresa. Proporciona herramientas para administrar empleados, roles, y permisos, además de facilitar el seguimiento de actividades laborales y las nominas de los empleados.",
     images: [
       "projects/rrhhpueble/rrhh1.png",
       "projects/rrhhpueble/rrhh2.png",
       "projects/rrhhpueble/rrhh3.png",
+      "projects/rrhhpueble/rrhh4.png",
+      "projects/rrhhpueble/rrhh5.png",
+      "projects/rrhhpueble/rrhh6.png",
+      "projects/rrhhpueble/rrhh7.png",
+      "projects/rrhhpueble/rrhh8.png",
+      "projects/rrhhpueble/rrhh9.png",
+      "projects/rrhhpueble/rrhh10.png",
+      "projects/rrhhpueble/rrhh11.png",
+      "projects/rrhhpueble/rrhh12.png",
     ],
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
     githubLink: "https://github.com/Pietro923/recursos-humanos-app",
-    liveLink: "https://proyecto1.com"
+    
   },
+  /*
   {
     title: "Sistema de Gestión - Alenort",
     description: "Un sistema integral diseñado para Alenort - Distribuidora Avícola, que optimiza la gestión de roles administrativos como Encargado de Logística, Administrador General y Vendedor.",
@@ -188,6 +198,7 @@ const projects = [
     githubLink: "https://github.com/Pietro923/Punto-de-venta-Alenort",
     liveLink: "https://proyecto2.com"
   },
+  */
   {
     title: "Portfolio Versión Nº 1 - Pietro Bonacossa",
     description: "Este es mi primer Portfolio realizado en Astro, utilizando Tailwind. Lo subí como plantilla disponible en Astro para que cualquier programador pueda crear su propio Portfolio realizando pequeños cambios para su personalización. Plantilla disponible en <a href='https://astro.build/themes/details/portfolio-apto-para-todo-pblico-portfolio-suitable-for-all-audiences/' target='_blank' class='text-blue-600''>Astro</a>.",
@@ -257,16 +268,17 @@ const Projects = () => {
                   </div>
                 </CardContent>
                 
-                <CardFooter className="flex justify-end gap-6 pt-4">
-                  <a 
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-                  >
-                    <Github className="w-5 h-5" />
-                    <span className="text-sm">Código</span>
-                  </a>
+              <CardFooter className="flex justify-end gap-6 pt-4">
+                <a 
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                >
+                  <Github className="w-5 h-5" />
+                  <span className="text-sm">Código</span>
+                </a>
+                {project.liveLink && (
                   <a 
                     href={project.liveLink}
                     target="_blank"
@@ -276,7 +288,8 @@ const Projects = () => {
                     <ExternalLink className="w-5 h-5" />
                     <span className="text-sm">Demo</span>
                   </a>
-                </CardFooter>
+                )}
+              </CardFooter>
               </div>
             </Card>
           ))}

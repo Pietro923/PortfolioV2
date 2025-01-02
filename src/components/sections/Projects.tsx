@@ -1,19 +1,111 @@
 "use client"
 import React, { useState } from 'react';
-import { Code, Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Code, Github, ExternalLink, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-const ImageCarousel = ({ images, title }) => {
+// Interfaces para las props
+interface ImageModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  images: string[];
+  currentIndex: number;
+  setCurrentIndex: (index: number | ((prev: number) => number)) => void;
+  title: string;
+}
+
+interface ImageCarouselProps {
+  images: string[];
+  title: string;
+}
+
+// Componente Modal para la imagen ampliada
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, images, currentIndex, setCurrentIndex, title }) => {
+  if (!isOpen) return null;
+
+  const nextSlide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prevIndex: number) => 
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const prevSlide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentIndex((prevIndex: number) => 
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={onClose}>
+      <div className="relative max-w-7xl max-h-[90vh] w-full mx-4">
+        <button
+          onClick={onClose}
+          className="absolute -top-8 right-0 text-white hover:text-gray-300 transition-colors"
+          aria-label="Cerrar"
+        >
+          <X className="w-8 h-8" />
+        </button>
+
+        <div className="relative" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+          <img
+            src={images[currentIndex]}
+            alt={`${title} - Image ${currentIndex + 1}`}
+            className="max-w-full max-h-[85vh] mx-auto object-contain"
+          />
+          
+          {images.length > 1 && (
+            <>
+              <button 
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-colors"
+                aria-label="Imagen anterior"
+              >
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+              <button 
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-colors"
+                aria-label="Siguiente imagen"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
+
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+                {images.map((_: string, index: number) => (
+                  <button
+                    key={index}
+                    onClick={(e: React.MouseEvent) => {
+                      e.stopPropagation();
+                      setCurrentIndex(index);
+                    }}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      index === currentIndex ? 'bg-white' : 'bg-white/50'
+                    }`}
+                    aria-label={`Ir a imagen ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => 
+    setCurrentIndex((prevIndex: number) => 
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => 
+    setCurrentIndex((prevIndex: number) => 
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
@@ -23,7 +115,8 @@ const ImageCarousel = ({ images, title }) => {
       <img 
         src={images[currentIndex]} 
         alt={`${title} - Image ${currentIndex + 1}`}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover cursor-pointer"
+        onClick={() => setModalOpen(true)}
       />
       
       {images.length > 1 && (
@@ -31,32 +124,41 @@ const ImageCarousel = ({ images, title }) => {
           <button 
             onClick={prevSlide}
             className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"
-            aria-label="Previous image"
+            aria-label="Imagen anterior"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button 
             onClick={nextSlide}
             className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors"
-            aria-label="Next image"
+            aria-label="Siguiente imagen"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
           
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {images.map((_, index) => (
+            {images.map((_: string, index: number) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
                   index === currentIndex ? 'bg-white' : 'bg-white/50'
                 }`}
-                aria-label={`Go to image ${index + 1}`}
+                aria-label={`Ir a imagen ${index + 1}`}
               />
             ))}
           </div>
         </>
       )}
+
+      <ImageModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        images={images}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        title={title}
+      />
     </div>
   );
 };
@@ -66,9 +168,9 @@ const projects = [
     title: "Aplicación Web RRHH - Pueble SA",
     description: "Desarrollada para Pueble SA, esta aplicación web optimiza la gestión de recursos humanos dentro de la empresa. Proporciona herramientas para administrar empleados, roles, y permisos, además de facilitar el seguimiento de actividades laborales y la generación de reportes personalizados.",
     images: [
-      "projects/wordlebyp/wordlebyp1.png",
-      "projects/wordlebyp/wordlebyp2.png",
-      "projects/wordlebyp/wordlebyp3.png",
+      "projects/rrhhpueble/rrhh1.png",
+      "projects/rrhhpueble/rrhh2.png",
+      "projects/rrhhpueble/rrhh3.png",
     ],
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
     githubLink: "https://github.com/Pietro923/recursos-humanos-app",
@@ -90,9 +192,11 @@ const projects = [
     title: "Portfolio Versión Nº 1 - Pietro Bonacossa",
     description: "Este es mi primer Portfolio realizado en Astro, utilizando Tailwind. Lo subí como plantilla disponible en Astro para que cualquier programador pueda crear su propio Portfolio realizando pequeños cambios para su personalización. Plantilla disponible en <a href='https://astro.build/themes/details/portfolio-apto-para-todo-pblico-portfolio-suitable-for-all-audiences/' target='_blank' class='text-blue-600''>Astro</a>.",
     images: [
-      "projects/wordlebyp/wordlebyp1.png",
-      "projects/wordlebyp/wordlebyp2.png",
-      "projects/wordlebyp/wordlebyp3.png",
+      "projects/portfoliov1/portfoliov1-1.png",
+      "projects/portfoliov1/portfoliov1-2.png",
+      "projects/portfoliov1/portfoliov1-3.png",
+      "projects/portfoliov1/portfoliov1-4.png",
+      "projects/portfoliov1/portfoliov1-5.png",
     ],
     technologies: ["Astro", "Tailwind CSS", "Netlify"],
     githubLink: "https://github.com/Pietro923/portfolio-Pietro",
@@ -134,9 +238,10 @@ const Projects = () => {
               <div className="flex flex-col flex-grow">
                 <CardHeader>
                   <CardTitle className="text-2xl">{project.title}</CardTitle>
-                  <CardDescription className="text-base">
-                    {project.description}
-                  </CardDescription>
+                  <CardDescription 
+                    className="text-base"
+                    dangerouslySetInnerHTML={{ __html: project.description }}
+                  />
                 </CardHeader>
                 
                 <CardContent className="flex-grow">

@@ -16,35 +16,35 @@ const certificates: Certificate[] = [
   {
     id: 1,
     title: "GitHub",
-    image: "/certs/certificate-github.jpg", 
+    image: "/certs/certificate-github.webp", 
     link: "https://cursos.desafiolatam.com/certificates/2bzutwrvbv",
     issuer: "Desafio Latam"
   },
   {
     id: 2,
     title: "Introducción a la Programación Web",
-    image: "/certs/certificate-prog-web.jpg",
+    image: "/certs/certificate-prog-web.webp",
     link: "https://cursos.desafiolatam.com/certificates/sz61enwcrg",
     issuer: "Desafio Latam"
   },
   {
     id: 3,
     title: "SQL Interactivo",
-    image: "/certs/certificate-sql.jpg",
+    image: "/certs/certificate-sql.webp",
     link: "https://www.tutorialesinteractivos.com/certificados/a5b3f840-934b-46cf-b210-e00d8b3b875e",
     issuer: "Desafio Latam"
   },
   {
     id: 4,
-    title: "CiberSegurity",
-    image: "/certs/cert_cibersegurity.png",
+    title: "CiberSecurity",
+    image: "/certs/cert_cibersecurity.webp",
     link: "https://www.credly.com/badges/41aafd94-7623-4b21-b94e-c5436b50cfae/public_url",
     issuer: "Cisco Networking Academy"
   },
   {
     id: 5,
     title: "English For It",
-    image: "/certs/cert_english.png",
+    image: "/certs/cert_english.webp",
     link: "https://www.credly.com/badges/964b77c8-142b-467b-87a5-0eed7084f6cd/public_url",
     issuer: "Cisco Networking Academy"
   },

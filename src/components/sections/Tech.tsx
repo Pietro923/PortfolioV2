@@ -51,7 +51,7 @@ const Tech = () => {
   };
 
   return (
-    <section id="tech" className="min-h-screen py-20 bg-neutral-50 dark:bg-neutral-950">
+    <section id="tech" className="min-h-screen py-20 ">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-16">
           <Grid2X2 className="w-8 h-8 text-neutral-800 dark:text-neutral-200" />

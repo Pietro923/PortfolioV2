@@ -115,7 +115,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
       <img 
         src={images[currentIndex]} 
         alt={`${title} - Image ${currentIndex + 1}`}
-        className="w-full h-full object-cover cursor-pointer"
+        className="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105 hover:brightness-90" // Cambios aquí
         onClick={() => setModalOpen(true)}
       />
       
@@ -168,18 +168,18 @@ const projects = [
     title: "Aplicación Web RRHH - Pueble SA",
     description: "Desarrollada para Pueble SA, con el objetivo de optimizar la gestión de recursos humanos dentro de la empresa. Proporciona herramientas para administrar empleados, roles, y permisos, además de facilitar el seguimiento de actividades laborales y las nominas de los empleados.",
     images: [
-      "projects/rrhhpueble/rrhh1.png",
-      "projects/rrhhpueble/rrhh2.png",
-      "projects/rrhhpueble/rrhh3.png",
-      "projects/rrhhpueble/rrhh4.png",
-      "projects/rrhhpueble/rrhh5.png",
-      "projects/rrhhpueble/rrhh6.png",
-      "projects/rrhhpueble/rrhh7.png",
-      "projects/rrhhpueble/rrhh8.png",
-      "projects/rrhhpueble/rrhh9.png",
-      "projects/rrhhpueble/rrhh10.png",
-      "projects/rrhhpueble/rrhh11.png",
-      "projects/rrhhpueble/rrhh12.png",
+      "projects/rrhhpueble/rrhh1.webp",
+      "projects/rrhhpueble/rrhh2.webp",
+      "projects/rrhhpueble/rrhh3.webp",
+      "projects/rrhhpueble/rrhh4.webp",
+      "projects/rrhhpueble/rrhh5.webp",
+      "projects/rrhhpueble/rrhh6.webp",
+      "projects/rrhhpueble/rrhh7.webp",
+      "projects/rrhhpueble/rrhh8.webp",
+      "projects/rrhhpueble/rrhh9.webp",
+      "projects/rrhhpueble/rrhh10.webp",
+      "projects/rrhhpueble/rrhh11.webp",
+      "projects/rrhhpueble/rrhh12.webp",
     ],
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
     githubLink: "https://github.com/Pietro923/recursos-humanos-app",
@@ -203,11 +203,11 @@ const projects = [
     title: "Portfolio Versión Nº 1 - Pietro Bonacossa",
     description: "Este es mi primer Portfolio realizado en Astro, utilizando Tailwind. Lo subí como plantilla disponible en Astro para que cualquier programador pueda crear su propio Portfolio realizando pequeños cambios para su personalización. Plantilla disponible en <a href='https://astro.build/themes/details/portfolio-apto-para-todo-pblico-portfolio-suitable-for-all-audiences/' target='_blank' class='text-blue-600''>Astro</a>.",
     images: [
-      "projects/portfoliov1/portfoliov1-1.png",
-      "projects/portfoliov1/portfoliov1-2.png",
-      "projects/portfoliov1/portfoliov1-3.png",
-      "projects/portfoliov1/portfoliov1-4.png",
-      "projects/portfoliov1/portfoliov1-5.png",
+      "projects/portfoliov1/portfoliov1-1.webp",
+      "projects/portfoliov1/portfoliov1-2.webp",
+      "projects/portfoliov1/portfoliov1-3.webp",
+      "projects/portfoliov1/portfoliov1-4.webp",
+      "projects/portfoliov1/portfoliov1-5.webp",
     ],
     technologies: ["Astro", "Tailwind CSS", "Netlify"],
     githubLink: "https://github.com/Pietro923/portfolio-Pietro",
@@ -217,9 +217,9 @@ const projects = [
     title: "Wordle by P",
     description: "Con el objetivo de practicar typescript y la programacion web cree un Wordle o Adivina la Palabra ya que me gusta mucho jugar ese juego.",
     images: [
-      "projects/wordlebyp/wordlebyp1.png",
-      "projects/wordlebyp/wordlebyp2.png",
-      "projects/wordlebyp/wordlebyp3.png",
+      "projects/wordlebyp/wordlebyp1.webp",
+      "projects/wordlebyp/wordlebyp2.webp",
+      "projects/wordlebyp/wordlebyp3.webp",
     ],
     technologies: ["Next.js", "Tailwind CSS","TypeScript", "Vercel",],
     githubLink: "https://github.com/Pietro923/wordle-by-P",

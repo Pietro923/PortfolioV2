@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Code, Globe, Rocket, Book } from 'lucide-react';
+import { User, Code, Globe, Rocket, Book, AppWindow } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 
 const About = () => {
@@ -20,14 +20,14 @@ const About = () => {
       description: "Optimización del rendimiento de aplicaciones web tanto estáticas como dinámicas."
     },
     {
-      icon: <Book className="w-5 h-5" />,
-      title: "Arquitectura",
-      description: "Arquitectura de sistemas basados en la nube, asegurando su escalabilidad y eficiencia."
+      icon: <AppWindow className="w-5 h-5" />,
+      title: "Apps de Escritorio",
+      description: "Creación de aplicaciones de escritorio multiplataforma robustas y eficientes."
     }
   ];
 
   return (
-    <section id="about" className="min-h-screen py-20 bg-neutral-50/50 dark:bg-neutral-950">
+    <section id="about" className="min-h-screen py-20">
   <div className="max-w-5xl mx-auto px-4">
     <div className="flex items-center gap-3 mb-16">
       <User className="w-6 h-6 text-neutral-800 dark:text-neutral-200" />

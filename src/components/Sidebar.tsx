@@ -11,35 +11,47 @@ const Sidebar = () => {
 
   useEffect(() => {
     setMounted(true)
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && activeSection !== entry.target.id) {
-            setActiveSection(entry.target.id)
-          }
-        })
-      },
-      {
-        rootMargin: '-45% 0px -45% 0px',
-        threshold: 0.1
-      }
-    )
+  }, [])
 
-    const sections = navItems.map(item => document.getElementById(item.id))
-    sections.forEach(section => section && observer.observe(section))
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map(item => document.getElementById(item.id))
+      
+      const current = sections.find(section => {
+        if (!section) return false
+        const rect = section.getBoundingClientRect()
+        // Ajustamos el área de detección para que sea más precisa
+        return rect.top <= window.innerHeight / 3 && rect.bottom >= window.innerHeight / 3
+      })
+
+      if (current && current.id !== activeSection) {
+        setActiveSection(current.id)
+      }
+    }
+
+    // Agregamos el evento de scroll
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    // Llamamos a handleScroll inmediatamente para establecer la sección inicial
+    handleScroll()
 
     return () => {
-      sections.forEach(section => section && observer.unobserve(section))
-      observer.disconnect()
+      window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [activeSection]) // Incluimos activeSection como dependencia
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setTimeout(() => setActiveSection(id), 300)
+      const headerOffset = 60; // Ajusta según el tamaño fijo del encabezado
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY
+      const offsetPosition = elementPosition - headerOffset
+  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+      
+      setActiveSection(id)
       setIsOpen(false)
     }
   }

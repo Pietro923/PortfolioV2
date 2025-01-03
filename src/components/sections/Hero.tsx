@@ -31,13 +31,7 @@ const getIconSrc = (link: { name: string; icon: string; url: string; darkIcon?: 
   };
 
 return (
-    <section id="home" className="min-h-screen relative flex items-center justify-center dark:bg-neutral-950 overflow-hidden">
-      {/* Decorative elements */}
-    <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-blue-100/20 to-transparent dark:from-blue-950/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-tl from-purple-100/20 to-transparent dark:from-purple-950/20 rounded-full blur-3xl" />
-    </div>
-
+    <section id="home" className="min-h-screen relative flex items-center justify-center overflow-hidden">
     <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

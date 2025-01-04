@@ -7,8 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from '@emailjs/browser';
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -33,21 +35,21 @@ const Contact = () => {
 
     try {
         const response = await emailjs.send(
-            'Portfolio-Contact', // Reemplaza con tu Service ID
-            'template_czatkd1', // Reemplaza con tu Template ID
+            'Portfolio-Contact',
+            'template_czatkd1',
             {
               from_name: formData.nombre,
               reply_to: formData.correo,
               subject: formData.asunto,
               message: formData.mensaje,
             },
-            '0M277pAq9VZnYfBbu' // Reemplaza con tu Public Key
+            '0M277pAq9VZnYfBbu'
           );
 
           if (response.status === 200) {
         toast({
-          title: "¡Mensaje enviado!",
-          description: "Gracias por contactarte conmigo. Te responderé lo antes posible.",
+          title: t('contact.form.success.title'),
+          description: t('contact.form.success.description'),
         });
         setFormData({
           nombre: '',
@@ -61,8 +63,8 @@ const Contact = () => {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "No se pudo enviar el mensaje. Por favor, intenta nuevamente.",
+        title: t('contact.form.error.title'),
+        description: t('contact.form.error.description'),
       });
     } finally {
       setIsLoading(false);
@@ -72,20 +74,20 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: <MapPin className="w-6 h-6" />,
-      title: "Ubicación",
-      content: "San Miguel de Tucumán, Tucumán, Argentina",
+      title: t('contact.info.location.title'),
+      content: t('contact.info.location.content'),
       link: null
     },
     {
       icon: <Mail className="w-6 h-6" />,
-      title: "Correo Electrónico",
-      content: "jpbonacossa@gmail.com",
+      title: t('contact.info.email.title'),
+      content: t('contact.info.email.content'),
       link: "mailto:jpbonacossa@gmail.com"
     },
     {
       icon: <Phone className="w-6 h-6" />,
-      title: "WhatsApp",
-      content: "(+54) 3816618632",
+      title: t('contact.info.whatsapp.title'),
+      content: t('contact.info.whatsapp.content'),
       link: "https://wa.me/3816618632"
     }
   ];
@@ -95,11 +97,10 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto px-4 w-full">
         <div className="flex items-center gap-4 mb-16">
           <Send className="w-8 h-8" />
-          <h2 className="text-4xl font-bold">Contactame</h2>
+          <h2 className="text-4xl font-bold">{t('contact.title')}</h2>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Información de Contacto */}
           <div className="space-y-6">
             <Card className="border-none shadow-lg">
               <CardContent className="p-6">
@@ -130,32 +131,30 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            {/* Mapa o imagen decorativa */}
             <Card className="border-none shadow-lg overflow-hidden">
-            <CardContent className="p-0">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.7725037034853!2d-65.22755378547264!3d-26.80828509487683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225d1f9a6b16f9%3A0xe31c6dd8c20ff091!2sSan%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n%2C%20Argentina!5e0!3m2!1ses-419!2s!4v1700000000000!5m2!1ses-419!2s"
-                width="100%"
-                height="192"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-              ></iframe>
-            </CardContent>
+              <CardContent className="p-0">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.7725037034853!2d-65.22755378547264!3d-26.80828509487683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225d1f9a6b16f9%3A0xe31c6dd8c20ff091!2sSan%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n%2C%20Argentina!5e0!3m2!1ses-419!2s!4v1700000000000!5m2!1ses-419!2s"
+                  width="100%"
+                  height="192"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </CardContent>
             </Card>
           </div>
 
-          {/* Formulario */}
           <Card className="border-none shadow-lg">
             <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
-              <p className="text-xl font-semibold text-gray-800 text-center dark:text-white">Contacto</p>
+                <p className="text-xl font-semibold text-gray-800 text-center dark:text-white">{t('contact.form.title')}</p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Input
                       type="text"
                       name="nombre"
-                      placeholder="Nombre"
+                      placeholder={t('contact.form.name')}
                       required
                       value={formData.nombre}
                       onChange={handleChange}
@@ -165,7 +164,7 @@ const Contact = () => {
                     <Input
                       type="email"
                       name="correo"
-                      placeholder="Correo electrónico"
+                      placeholder={t('contact.form.email')}
                       required
                       value={formData.correo}
                       onChange={handleChange}
@@ -177,7 +176,7 @@ const Contact = () => {
                   <Input
                     type="text"
                     name="asunto"
-                    placeholder="Asunto"
+                    placeholder={t('contact.form.subject')}
                     required
                     value={formData.asunto}
                     onChange={handleChange}
@@ -187,7 +186,7 @@ const Contact = () => {
                 <div className="space-y-2">
                   <Textarea
                     name="mensaje"
-                    placeholder="Tu mensaje..."
+                    placeholder={t('contact.form.message')}
                     required
                     rows={6}
                     value={formData.mensaje}
@@ -204,12 +203,12 @@ const Contact = () => {
                   {isLoading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Enviando...
+                      {t('contact.form.sending')}
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" />
-                      Enviar Mensaje
+                      {t('contact.form.sendButton')}
                     </>
                   )}
                 </Button>

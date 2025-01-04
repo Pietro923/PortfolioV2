@@ -1,14 +1,16 @@
+// src/components/ThemeLanguageControls.tsx
 "use client"
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Moon, Sun, Languages } from "lucide-react"
 import { useTheme } from "next-themes"
+import { useTranslation } from 'react-i18next'
 
 const ThemeLanguageControls = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
-  const [language, setLanguage] = useState<'es' | 'en'>('es')
-
+  const { i18n } = useTranslation()
+  
   // Evitar hidratación incorrecta
   useEffect(() => {
     setMounted(true)
@@ -24,8 +26,8 @@ const ThemeLanguageControls = () => {
         variant="ghost"
         size="icon"
         className="rounded-full bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm hover:bg-white dark:hover:bg-neutral-700"
-        onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
-        aria-label={`Change language to ${language === 'es' ? 'English' : 'Spanish'}`}
+        onClick={() => i18n.changeLanguage(i18n.language === 'es' ? 'en' : 'es')}
+        aria-label={`Change language to ${i18n.language === 'es' ? 'English' : 'Spanish'}`}
       >
         <Languages className="h-4 w-4" />
       </Button>

@@ -1,5 +1,7 @@
+"use client"
 import React from 'react';
 import { Grid2X2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Tech = () => {
   const technologies = {
@@ -41,22 +43,22 @@ const Tech = () => {
 
   const getCategoryTitle = (category: string) => {
     const titles: { [key: string]: string } = {
-      languages: 'Lenguajes',
-      databases: 'Bases de Datos',
-      frameworks: 'Frameworks y Librerías',
-      tools: 'Herramientas',
+      languages: t('tech.cat1'),
+      databases: t('tech.cat2'),
+      frameworks: t('tech.cat3'),
+      tools: t('tech.cat4'),
     };
   
     return titles[category] || 'Categoría desconocida';
   };
-
+  const { t } = useTranslation();
   return (
     <section id="tech" className="min-h-screen py-20 ">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-16">
           <Grid2X2 className="w-8 h-8 text-neutral-800 dark:text-neutral-200" />
           <h2 className="text-4xl font-light tracking-tight text-neutral-800 dark:text-neutral-200">
-            Tecnologías
+          {t('tech.title')}
           </h2>
         </div>
 

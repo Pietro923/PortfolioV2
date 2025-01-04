@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Award, ExternalLink, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useTranslation } from 'react-i18next';
 
 // Define el tipo de los certificados
 type Certificate = {
@@ -52,13 +53,14 @@ const certificates: Certificate[] = [
 
 const Certs = () => {
 const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+const { t } = useTranslation();
 
 return (
     <section id="certs" className="min-h-screen flex items-center justify-center py-20">
     <div className="max-w-6xl mx-auto px-4 w-full">
         <div className="flex items-center gap-4 mb-16">
         <Award className="w-8 h-8" />
-        <h2 className="text-4xl font-bold">Certificados</h2>
+        <h2 className="text-4xl font-bold">{t('certs.title')}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -78,7 +80,7 @@ return (
                 <div className="opacity-0 group-hover:opacity-100 text-white text-center p-4">
                     <h3 className="text-xl font-semibold mb-2">{cert.title}</h3>
                     <p className="text-sm">{cert.issuer}</p>
-                    <p className="mt-2 text-sm">Click para ver más</p>
+                    <p className="mt-2 text-sm">{t('certs.button')}</p>
                 </div>
                 </div>
             </div>
@@ -118,7 +120,7 @@ return (
                 />
                 <div className="mt-4 text-center">
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Emitido por {selectedCert.issuer}
+                {t('certs.emitido')} {selectedCert.issuer}
                 </p>
                 </div>
             </div>

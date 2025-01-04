@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Download } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
 const { theme, resolvedTheme } = useTheme();
@@ -29,6 +30,7 @@ const getIconSrc = (link: { name: string; icon: string; url: string; darkIcon?: 
     const currentTheme = theme === 'system' ? resolvedTheme : theme;
     return link.darkIcon && currentTheme === 'dark' ? link.darkIcon : link.icon;
   };
+  const { t } = useTranslation();
 
 return (
     <section id="home" className="min-h-screen relative flex items-center justify-center overflow-hidden">
@@ -51,14 +53,14 @@ return (
                 <Badge 
                     className="text-sm font-medium px-4 py-1 bg-emerald-100 text-emerald-700 hover:bg-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                     <span className="mr-1.5 h-2 w-2 rounded-full bg-emerald-500 inline-block"></span>
-                    Open to Work
+                    {t('hero.badge')}
                 </Badge>
                 </div>
                 
                 <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
                 Juan Pietro{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-                    Bonacossa
+                Bonacossa
                 </span>
                 </h1>
             </motion.div>
@@ -69,10 +71,7 @@ return (
                 transition={{ delay: 0.4, duration: 0.8 }}
                 className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed"
             >
-                Tengo 21 años, soy de Tucumán, Argentina 🧉. Me especializo en tecnología 
-                y desarrollo de software, siempre buscando aprender y mejorar. 
-                Mi objetivo es participar en proyectos innovadores que amplíen mis 
-                conocimientos y permitan aportar soluciones creativas y efectivas.
+                {t('hero.text')}
             </motion.p>
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -118,7 +117,7 @@ return (
             >
                 <a href="Pietro/Juan Pietro Bonacossa CV.pdf" target="_blank" rel="noopener noreferrer">
                 <Download className="w-4 h-4" />
-                Descargar CV
+                {t('hero.buttoncv')}
                 </a>
             </Button>
             </div>

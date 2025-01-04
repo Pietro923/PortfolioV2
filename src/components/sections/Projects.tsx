@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Code, Github, ExternalLink, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslation } from 'react-i18next';
 
 // Interfaces para las props
 interface ImageModalProps {
@@ -162,11 +163,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, title }) => {
     </div>
   );
 };
-
 const projects = [
   {
-    title: "Aplicación Web RRHH - Pueble SA",
-    description: "Desarrollada para Pueble SA, con el objetivo de optimizar la gestión de recursos humanos dentro de la empresa. Proporciona herramientas para administrar empleados, roles, y permisos, además de facilitar el seguimiento de actividades laborales y las nominas de los empleados.",
+    titleKey: "projects.projects.pueble.title",
+    descriptionKey: "projects.projects.pueble.description",
     images: [
       "projects/rrhhpueble/rrhh1.webp",
       "projects/rrhhpueble/rrhh2.webp",
@@ -200,8 +200,8 @@ const projects = [
   },
   */
   {
-    title: "Portfolio Versión Nº 1 - Pietro Bonacossa",
-    description: "Este es mi primer Portfolio realizado en Astro, utilizando Tailwind. Lo subí como plantilla disponible en Astro para que cualquier programador pueda crear su propio Portfolio realizando pequeños cambios para su personalización. Plantilla disponible en <a href='https://astro.build/themes/details/portfolio-apto-para-todo-pblico-portfolio-suitable-for-all-audiences/' target='_blank' class='text-blue-600''>Astro</a>.",
+    titleKey: "projects.projects.portfolio.title",
+    descriptionKey: "projects.projects.portfolio.description",
     images: [
       "projects/portfoliov1/portfoliov1-1.webp",
       "projects/portfoliov1/portfoliov1-2.webp",
@@ -214,8 +214,8 @@ const projects = [
     liveLink: "https://portfolio-pietro.netlify.app/"
   },
   {
-    title: "Wordle by P",
-    description: "Con el objetivo de practicar typescript y la programacion web cree un Wordle o Adivina la Palabra ya que me gusta mucho jugar ese juego.",
+    titleKey: "projects.projects.wordle.title",
+    descriptionKey: "projects.projects.wordle.description",
     images: [
       "projects/wordlebyp/wordlebyp1.webp",
       "projects/wordlebyp/wordlebyp2.webp",
@@ -228,12 +228,13 @@ const projects = [
 ];
 
 const Projects = () => {
+  const { t } = useTranslation();
   return (
     <section id="projects" className="min-h-screen py-20">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-16">
           <Code className="w-8 h-8" />
-          <h2 className="text-4xl font-bold">Proyectos</h2>
+          <h2 className="text-4xl font-bold">{t('projects.title')}</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -242,16 +243,16 @@ const Projects = () => {
               <div className="h-64">
                 <ImageCarousel 
                   images={project.images} 
-                  title={project.title}
+                  title={t(project.titleKey)}
                 />
               </div>
               
               <div className="flex flex-col flex-grow">
                 <CardHeader>
-                  <CardTitle className="text-2xl">{project.title}</CardTitle>
+                <CardTitle className="text-2xl">{t(project.titleKey)}</CardTitle>
                   <CardDescription 
                     className="text-base"
-                    dangerouslySetInnerHTML={{ __html: project.description }}
+                    dangerouslySetInnerHTML={{ __html: t(project.descriptionKey) }}
                   />
                 </CardHeader>
                 
@@ -276,7 +277,7 @@ const Projects = () => {
                   className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
                 >
                   <Github className="w-5 h-5" />
-                  <span className="text-sm">Código</span>
+                  <span className="text-sm">{t('projects.button1')}</span>
                 </a>
                 {project.liveLink && (
                   <a 
@@ -286,7 +287,7 @@ const Projects = () => {
                     className="flex items-center gap-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
                   >
                     <ExternalLink className="w-5 h-5" />
-                    <span className="text-sm">Demo</span>
+                    <span className="text-sm">{t('projects.button2')}</span>
                   </a>
                 )}
               </CardFooter>
